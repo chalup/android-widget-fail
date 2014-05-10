@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.chalup.widgetfail.widget">
+
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+        <receiver android:name="org.chalup.widgetfail.widget.FailWidget">
+
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="android.appwidget.action.APPWIDGET_ENABLED"/>
+                <action android:name="android.appwidget.action.APPWIDGET_DISABLED"/>
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/fail_widget_info"/>
+        </receiver>
+
+        <service
+            android:name="org.chalup.widgetfail.widget.FailWidgetService"
+            android:enabled="true"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS">
+        </service>
+
+        <activity
+            android:name="org.chalup.widgetfail.widget.FailWidgetActivity"
+            android:label="@string/title_activity_fail_widget"/>
+
+        <provider
+            android:name="org.chalup.widgetfail.widget.FailWidgetContentProvider"
+            android:authorities="org.chalup.failwidget"
+            android:enabled="true"
+            android:exported="true">
+        </provider>
+
+        <service
+            android:name="org.chalup.widgetfail.widget.ItemDeleterService"
+            android:exported="false">
+        </service>
+    </application>
+
+</manifest>
